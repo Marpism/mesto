@@ -1,0 +1,10 @@
+.card__heading {
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 29px;
+  margin: 25px auto 28px 21px;
+  max-width: 170px;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+  overflow: hidden;
+}

@@ -1,0 +1,12 @@
+.popup {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  min-height: 100%;
+  position: absolute;
+  z-index: 1;
+  display: none;
+}
+
+.popup_opened {
+  display: block;
+}
