@@ -5,7 +5,7 @@
   background-color: transparent;
   transition: opacity 1s ease;
   position: absolute;
-  top: 16px; 
+  top: 16px;
   right: -42px;
 }
 
@@ -14,7 +14,7 @@
     width: 18px;
     height: 18px;
     padding: 0;
-    top: 10px; 
+    top: 10px;
     right: -28px;
     font-size: revert;
   }
