@@ -16,4 +16,4 @@
 
 Реализовать функцию добавления новых фотографий с помощью JavaScript. 
 
-* [Ссылка на репозиторий на github](https://github.com/Marpism/mesto)
+* [Ссылка на репозиторий на github.pages](https://marpism.github.io/mesto/)

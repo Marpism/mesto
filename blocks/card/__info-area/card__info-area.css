@@ -1,0 +1,12 @@
+.card__info-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 25px 20px 31px 21px;
+}
+
+@media screen and (max-width: 320px) {
+  .card__info-area {
+    margin: 25px 15px 31px 21px;
+  }
+}

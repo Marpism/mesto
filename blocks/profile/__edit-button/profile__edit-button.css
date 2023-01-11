@@ -4,9 +4,9 @@
   border: 1px solid white;
   background-color: transparent;
   transition: opacity 1s ease;
-  position: absolute;
+  /* position: absolute;
   top: 16px;
-  right: -42px;
+  right: -42px; */
 }
 
 @media screen and (max-width: 320px) {
@@ -14,8 +14,6 @@
     width: 18px;
     height: 18px;
     padding: 0;
-    top: 10px;
-    right: -28px;
     font-size: revert;
   }
 }
