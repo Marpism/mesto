@@ -2,6 +2,7 @@
 @import url(../fonts/Inter_Web/inter.css);
 @import url(../blocks/body/body.css);
 @import url(../blocks/page/page.css);
+@import url(../blocks/content/content.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/profile/profile.css);
@@ -11,16 +12,15 @@
 @import url(../blocks/profile/__username/profile__username.css);
 @import url(../blocks/profile/__subscription/profile__subscription.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
-@import url(../blocks/profile/__edit-button-icon/profile__edit-button-icon.css);
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__form-heading/popup__form-heading.css);
 @import url(../blocks/popup/__form-input/popup__form-input.css);
-@import url(../blocks/submit-button/submit-button.css);
-@import url(../blocks/close-icon/close-icon.css);
+@import url(../blocks/popup/__submit-button/popup__submit-button.css);
+@import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
-@import url(../blocks/profile/__add-button-icon/profile__add-button-icon.css);
 @import url(../blocks/cards/cards.css);
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/__image/card__image.css);
