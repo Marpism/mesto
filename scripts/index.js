@@ -1,5 +1,5 @@
 
-// Открытие/закрытие попапа
+// Открытие/закрытие попапов
 let popup = document.querySelector('.popup');
 let username = document.querySelector('.profile__username');
 let subscription = document.querySelector('.profile__subscription');
@@ -13,15 +13,11 @@ function popupOpen() {
 }
 
 function popupClose() {
-  popup.classList.remove('popup_opened');
+  document.querySelector('.popup_opened').classList.remove('popup_opened');
 }
 
 let editButton = document.querySelector('.profile__edit-button');
 editButton.addEventListener('click', popupOpen);
-
-let closeButton = document.querySelector('.popup__close-button');
-closeButton.addEventListener('click', popupClose);
-
 
 // редактирование имени/подписи
 let form = document.querySelector('form');
@@ -35,16 +31,49 @@ function popupSubmit(event) {
 
 form.addEventListener('submit', popupSubmit);
 
+// рендеринг карточек
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+const cardContainer = document.querySelector('.cards');
+const cardTemplate = document.querySelector('#card-template').content;
+
+for (let i = 0; i < initialCards.length; i++) {
+  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  cardElement.querySelector('.card__heading').textContent = initialCards[i].name;
+  cardElement.querySelector('.card__image').src = initialCards[i].link;
+  cardContainer.append(cardElement);
+}
 
 // лайки
-// let likeButtons = document.querySelectorAll('.card__like-icon');
+const likeButtons = document.querySelectorAll('.card__like-icon');
 
-// for (let i = 0; i < likeButtons.length; i++) {
-//   likeButtons[i].addEventListener('click', function() {
-//     if (this.src.slice(-14) === 'heart-icon.svg') {
-//       this.src = './images/heart-icon_active.svg';
-//     } else { 
-//       this.src = './images/heart-icon.svg';
-//     }
-//   });
-// }
+for (let i = 0; i < likeButtons.length; i++) {
+  likeButtons[i].addEventListener('click', function() {
+    this.classList.toggle('card__like-icon_active');
+  })
+}

@@ -23,10 +23,12 @@
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/cards/cards.css);
 @import url(../blocks/card/card.css);
+@import url(../blocks/card/__bin-icon/card__bin-icon.css);
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__info-area/card__info-area.css);
 @import url(../blocks/card/__heading/card__heading.css);
 @import url(../blocks/card/__like-icon/card__like-icon.css);
+@import url(../blocks/card/__like-icon/_active/card__like-icon_active.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 

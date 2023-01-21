@@ -11,7 +11,7 @@
     <div class="page">
       <header class="header">
         <img src="./images/logo.svg" class="header__logo" alt="Логотип">
-      </header>
+      </header>1
 
       <main class="content">
         <section class="profile">
@@ -26,7 +26,7 @@
           <button type ="button" class="profile__add-button"></button>
         </section>
         <section class="cards">
-          <article class="card">
+          <!-- <article class="card">
             <img class="card__image" src="./images/2.jpg" alt="Фото позднесоветского многоквартирного дома">
             <div class="card__info-area">
               <h2 class="card__heading">Москва</h2>
@@ -67,7 +67,7 @@
               <h2 class="card__heading">Санкт-Петербург</h2>
               <button type="button" class="card__like-icon"></button>
             </div>
-          </article>
+          </article> -->
         </section>
       </main>
 
@@ -81,8 +81,31 @@
             <input type="text" maxlength="20" name="username" id="form-input-username" class="popup__form-input" required>
             <input type="text" maxlength="20" name="subscription" id="form-input-subscription" class="popup__form-input" required>
             <button type="submit" name="submit" class="popup__submit-button">Сохранить</button>
-            <button type="button" class="popup__close-button"></button>
+            <button type="button" class="popup__close-button" onclick="popupClose()"></button>
           </form>
+        </div>
+      </div>
+        <div class="popup popup_opened">
+          <div class="popup__container">
+            <form name="edit-name-form" class="popup__form">
+              <h2 class="popup__form-heading">Новое место</h2>
+              <input type="text" maxlength="20" name="place" id="form-input-place" class="popup__form-input" required placeholder="Название">
+              <input type="text" maxlength="20" name="link" id="form-input-link" class="popup__form-input" required placeholder="Ссылка на картинку">
+              <button type="submit" name="submit" class="popup__submit-button">Сохранить</button>
+              <button type="button" class="popup__close-button" onclick="popupClose()"></button>
+            </form>
+          </div>
+        </div>
+        <template id="card-template">
+          <div class="card">
+            <button type="button" class="card__bin-icon"></button>
+            <img class="card__image" src="">
+            <div class="card__info-area">
+              <h2 class="card__heading"></h2>
+              <button type="button" class="card__like-icon"></button>
+            </div>
+          </div>
+        </template>
         </div>
       </div>
     </div>
