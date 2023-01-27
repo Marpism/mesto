@@ -31,42 +31,69 @@ const cardTemplate = document.querySelector('#card-template').content;
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__image-caption');
 
+function createCard(name, link) {
+  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  cardElement.querySelector('.card__heading').textContent = name;
+  cardElement.querySelector('.card__image').src = link;
+  cardElement.querySelector('.card__image').alt = name;
+
+  // удаление карточки
+  cardElement.querySelector('.card__bin-icon').addEventListener('click', () => {
+    cardElement.remove();
+  })
+
+  // открытие попапа с картинкой
+  const cardImage = cardElement.querySelector('.card__image');
+  cardImage.addEventListener('click', function() {
+    popupImage.src = cardImage.src;
+    popupCaption.textContent = cardImage.alt;
+    popupImage.alt = cardImage.alt;
+    openPopup(imagePopup)
+  })
+
+  return cardElement;
+}
+
 function renderInitialCards() {
   for (let i = 0; i < initialCards.length; i++) {
-    const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-    cardElement.querySelector('.card__heading').textContent = initialCards[i].name;
-    cardElement.querySelector('.card__image').src = initialCards[i].link;
-    cardElement.querySelector('.card__image').alt = initialCards[i].name;
+    const cardElement = createCard(initialCards[i].name, initialCards[i].link);
+    
     cardContainer.append(cardElement);
   }}
-  renderInitialCards()
+
+renderInitialCards();
 
 // добавление карточки
 const placeInput = document.querySelector('#form-input-place');
 const linkInput = document.querySelector('#form-input-link');
 const addForm = document.querySelector('#add-form');
 
-function createCard(event) {
-  event.preventDefault();
-  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-  cardElement.querySelector('.card__heading').textContent = placeInput.value;
-  cardElement.querySelector('.card__image').src = linkInput.value;
-  cardElement.querySelector('.card__image').alt = placeInput.value;
-  cardContainer.prepend(cardElement);
-  closePopup()
-}
+// function createCard(event) {
+//   event.preventDefault();
+//   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+//   cardElement.querySelector('.card__heading').textContent = placeInput.value;
+//   cardElement.querySelector('.card__image').src = linkInput.value;
+//   cardElement.querySelector('.card__image').alt = placeInput.value;
+//   cardContainer.prepend(cardElement);
+//   closePopup()
+// }
 
-addForm.addEventListener('submit', createCard);
+addForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+  const cardElement = createCard(placeInput.value, linkInput.value);
+  cardContainer.prepend(cardElement);
+  closePopup();
+});
 
 // удаление карточки
-const trashButtons = document.querySelectorAll('.card__bin-icon');
+// const trashButtons = document.querySelectorAll('.card__bin-icon');
 
-trashButtons.forEach((button) => {
-  const card = button.closest('.card');
-  button.addEventListener('click', () => {
-    card.remove();
-  });
-});
+// trashButtons.forEach((button) => {
+//   const card = button.closest('.card');
+//   button.addEventListener('click', () => {
+//     card.remove();
+//   });
+// });
 
 // Открытие попапа
 const editPopup = document.querySelector('#edit_popup');
@@ -99,15 +126,15 @@ function openAddPopup() {
   addForm.reset();
 }
 
-const cardImage = document.querySelectorAll('.card__image');
-  for (let i = 0; i < cardImage.length; i++) {
-    cardImage[i].addEventListener('click', function() {
-      popupImage.src = cardImage[i].src;
-      popupCaption.textContent = cardImage[i].alt;
-      popupImage.alt = cardImage[i].alt;
-      openPopup(imagePopup)
-    })
-  }
+// const cardImage = document.querySelectorAll('.card__image');
+//   for (let i = 0; i < cardImage.length; i++) {
+//     cardImage[i].addEventListener('click', function() {
+//       popupImage.src = cardImage[i].src;
+//       popupCaption.textContent = cardImage[i].alt;
+//       popupImage.alt = cardImage[i].alt;
+//       openPopup(imagePopup)
+//     })
+//   }
 
 // закрытие попапа
 const closeButtons = document.querySelectorAll('.popup__close-button');
@@ -117,9 +144,12 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => closePopup(popup));
 });
 
-  function closePopup() {
-    document.querySelector('.popup_opened').classList.remove('popup_opened');
-  };
+function closePopup() {
+  const popupIsOpened = document.querySelector('.popup_opened');
+  if (popupIsOpened) {
+    popupIsOpened.classList.remove('popup_opened');
+  }
+};
 
 
 // редактирование имени/подписи
