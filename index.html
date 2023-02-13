@@ -26,74 +26,46 @@
           <button type ="button" class="profile__add-button"></button>
         </section>
         <section class="cards">
-          <!-- <article class="card">
-            <img class="card__image" src="./images/2.jpg" alt="Фото позднесоветского многоквартирного дома">
-            <div class="card__info-area">
-              <h2 class="card__heading">Москва</h2>
-              <button type="button" class="card__like-icon"></button>
-            </div>
-          </article>
-          <article class="card">
-            <img class="card__image" src="./images/6.jpg" alt="Фото небольшого старого деревянного домика">
-              <div class="card__info-area">
-                <h2 class="card__heading">Липецк</h2>
-                <button type="button" class="card__like-icon"></button>
-              </div>
-          </article>
-          <article class="card">
-            <img class="card__image" src="./images/1.jpg" alt="Фото российских полицейских с мегафоном">
-            <div class="card__info-area">
-              <h2 class="card__heading">Улан-Удэ</h2>
-              <button type="button" class="card__like-icon"></button>
-            </div>
-          </article>
-          <article class="card">
-            <img class="card__image" src="./images/3.jpg" alt="Фото советской мозаики на стене дома">
-            <div class="card__info-area">
-              <h2 class="card__heading">Ярославль</h2>
-              <button type="button" class="card__like-icon"></button>
-            </div>
-          </article>
-          <article class="card">
-            <img class="card__image" src="./images/5.jpg" alt="фото многоквартирного дома">
-            <div class="card__info-area">
-              <h2 class="card__heading">Владивосток</h2>
-              <button type="button" class="card__like-icon"></button>
-            </div>
-          </article>
-          <article class="card">
-            <img class="card__image" src="./images/4.jpg" alt="Фото советского многоквартирного дома">
-            <div class="card__info-area">
-              <h2 class="card__heading">Санкт-Петербург</h2>
-              <button type="button" class="card__like-icon"></button>
-            </div>
-          </article> -->
         </section>
       </main>
       <footer class="footer">
         <p class="footer__copyright">	&#169; 2022 Mesto Russia</p>
       </footer>
+
+
+
       <div class="popup" id="edit_popup">
         <div class="popup__container">
-          <form name="edit-name-form" class="popup__form" id="edit-form">
-            <h2 class="popup__form-heading">Редактировать профиль</h2>
-            <input type="text" maxlength="20" name="username" id="form-input-username" class="popup__form-input" required>
-            <input type="text" maxlength="20" name="subscription" id="form-input-subscription" class="popup__form-input" required>
-            <button type="submit" name="submit" class="popup__submit-button">Сохранить</button>
-            <button type="button" class="popup__close-button"></button>
+          <form name="edit-name-form" class="popup__form" id="edit-form" novalidate>
+            <fieldset class="popup__fieldset">
+              <h2 class="popup__form-heading">Редактировать профиль</h2>
+              <input type="text" minlength="2" maxlength="40" name="username" id="form-input-username" class="popup__input" required>
+              <span class="form-input-username-error"></span>
+              <input type="text" minlength="2" maxlength="200" name="subscription" id="form-input-subscription" class="popup__input" required>
+              <span class="form-input-subscription-error"></span>
+              <button type="submit" name="submit" class="popup__submit-button">Сохранить</button>
+              <button type="button" class="popup__close-button"></button>
+          </fieldset>
           </form>
         </div>
       </div>
       <div class="popup" id="add_popup">
         <div class="popup__container">
-          <form name="add-form" class="popup__form" id="add-form">
-            <h2 class="popup__form-heading">Новое место</h2>
-            <input type="text" maxlength="20" name="place" id="form-input-place" class="popup__form-input" required placeholder="Название">
-            <input type="text" name="link" id="form-input-link" class="popup__form-input" required placeholder="Ссылка на картинку">
-            <button type="submit" name="submit" class="popup__submit-button">Сохранить</button>
-            <button type="button" class="popup__close-button"></button>
+          <form name="add-form" class="popup__form" id="add-form" novalidate>
+            <fieldset class="popup__fieldset">
+              <h2 class="popup__form-heading">Новое место</h2>
+              <input type="text" minlength="2" maxlength="30" name="place" id="form-input-place" class="popup__input" required placeholder="Название">
+              <span class="form-input-place-error"></span>
+              <input type="url" name="link" id="form-input-link" class="popup__input" required placeholder="Ссылка на картинку">
+              <span class="form-input-link-error"></span>
+              <button type="submit" name="submit" class="popup__submit-button">Сохранить</button>
+              <button type="button" class="popup__close-button"></button>
+            </fieldset>
           </form>
         </div>
+
+
+
       </div>
       <div class="popup popup_dark" id="image_popup">
         <figure class="popup__image-container">
@@ -114,5 +86,6 @@
       </template>
     </div>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>

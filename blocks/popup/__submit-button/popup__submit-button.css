@@ -10,6 +10,7 @@
   cursor: pointer;
   transition: opacity 1s ease;
   margin-bottom: 38.8px;
+  margin-top: 38px;
 }
 
 @media screen and (max-width: 446px) {

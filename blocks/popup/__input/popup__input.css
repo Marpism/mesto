@@ -1,18 +1,18 @@
-.popup__form-input {
+.popup__input {
   width: 100%;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  margin: 0 auto 28px auto;
+  margin: 0 auto 5px auto;
   font-size: 14px;
   line-height: 17px;
   font-weight: 400;
   padding: 0 0 9px 0;
 }
 
-.popup__form-input:last-of-type {
-  margin: 0 auto 45px auto;
+.popup__input:last-of-type {
+  margin: 30px auto 5px auto;
 }
 
-.popup__form-input:focus {
+.popup__input:focus {
   outline: none;
 }

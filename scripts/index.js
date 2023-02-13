@@ -75,32 +75,12 @@ const placeInput = document.querySelector('#form-input-place');
 const linkInput = document.querySelector('#form-input-link');
 const addForm = document.querySelector('#add-form');
 
-// function createCard(event) {
-//   event.preventDefault();
-//   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-//   cardElement.querySelector('.card__heading').textContent = placeInput.value;
-//   cardElement.querySelector('.card__image').src = linkInput.value;
-//   cardElement.querySelector('.card__image').alt = placeInput.value;
-//   cardContainer.prepend(cardElement);
-//   closePopup()
-// }
-
 addForm.addEventListener('submit', function(event) {
   event.preventDefault();
   const cardElement = createCard(placeInput.value, linkInput.value);
   cardContainer.prepend(cardElement);
   closePopup();
 });
-
-// удаление карточки
-// const trashButtons = document.querySelectorAll('.card__bin-icon');
-
-// trashButtons.forEach((button) => {
-//   const card = button.closest('.card');
-//   button.addEventListener('click', () => {
-//     card.remove();
-//   });
-// });
 
 // Открытие попапа
 const editPopup = document.querySelector('#edit_popup');
@@ -133,16 +113,6 @@ function openAddPopup() {
   addForm.reset();
 }
 
-// const cardImage = document.querySelectorAll('.card__image');
-//   for (let i = 0; i < cardImage.length; i++) {
-//     cardImage[i].addEventListener('click', function() {
-//       popupImage.src = cardImage[i].src;
-//       popupCaption.textContent = cardImage[i].alt;
-//       popupImage.alt = cardImage[i].alt;
-//       openPopup(imagePopup)
-//     })
-//   }
-
 // закрытие попапа
 const closeButtons = document.querySelectorAll('.popup__close-button');
 
@@ -151,13 +121,24 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => closePopup(popup));
 });
 
+document.addEventListener('keydown', function(evt) {
+  if (evt.key === 'Escape') {
+    closePopup()
+  }
+})
+
+document.addEventListener('click', function(evt) {
+  if (evt.target.classList.contains('popup')) {
+    closePopup()
+  }
+})
+
 function closePopup() {
   const popupIsOpened = document.querySelector('.popup_opened');
   if (popupIsOpened) {
     popupIsOpened.classList.remove('popup_opened');
   }
 };
-
 
 // редактирование имени/подписи
 const editForm = document.querySelector('#edit-form');
@@ -170,3 +151,4 @@ function handleEditFormSubmit(event) {
 }
 
 editForm.addEventListener('submit', handleEditFormSubmit);
+
