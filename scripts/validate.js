@@ -1,20 +1,25 @@
+const settings = {
+  inputTypeErrorClass: 'popup__input_error',
+  inputErrorClassActive: 'error_visible'
+}
+
 // сделать поле красным и показать ошибку
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_error');
+  inputElement.classList.add(settings.inputTypeErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('error_visible');
+  errorElement.classList.add(settings.inputErrorClassActive);
 };
 
 // убрать ошибку
 
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_error');
-  errorElement.classList.remove('error_visible');
+  inputElement.classList.remove(settings.inputTypeErrorClass);
+  errorElement.classList.remove(settings.inputErrorClassActive);
   errorElement.textContent = '';
-}
+};
 
 // проверка валидности
 
@@ -33,6 +38,11 @@ const setEventListeners = (formElement) => {
   const buttonElement = formElement.querySelector('.popup__submit-button');
 
   toggleButtonState(inputList, buttonElement);
+  formElement.addEventListener('reset', () => {
+    setTimeout(() => {
+      toggleButtonState(inputList, buttonElement);
+    }, 1);
+  });
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
@@ -41,31 +51,6 @@ const setEventListeners = (formElement) => {
     });
   });
 };
-
-// включить валидацию 
-
-function enableValidation() {
-  const formList = Array.from(document.querySelectorAll('.popup__form')); 
-  formList.forEach((formElement) => {
-   formElement.addEventListener('submit', (evt) => {
-     evt.preventDefault();
-   });
-   const fieldsetList = Array.from(formElement.querySelectorAll('.popup__fieldset'));
-   fieldsetList.forEach((fieldset) => {
-     setEventListeners(fieldset);
-   });
- }); 
- };
-
-   enableValidation();
-
-  //  искать невалидные инпуты
-
-   function hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-  }
 
   // переключать кнопку
 
@@ -78,3 +63,30 @@ function enableValidation() {
       buttonElement.removeAttribute("disabled");
     }
   }
+
+    //  искать невалидные инпуты
+
+    function hasInvalidInput(inputList) {
+      return inputList.some((inputElement) => {
+      return !inputElement.validity.valid;
+    });
+    }
+
+  // включить валидацию 
+
+function enableValidation() {
+  const formList = Array.from(document.querySelectorAll('.popup__form')); 
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
+     evt.preventDefault();
+   });
+    formList.forEach((formElement) => {
+      formElement.addEventListener('submit', (evt) => {
+       evt.preventDefault();
+    });
+    setEventListeners(formElement);
+  }); 
+ }); 
+ };
+
+   enableValidation();

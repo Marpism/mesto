@@ -33,9 +33,10 @@ const popupCaption = document.querySelector('.popup__image-caption');
 
 function createCard(name, link) {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  const cardImage = cardElement.querySelector('.card__image');
   cardElement.querySelector('.card__heading').textContent = name;
-  cardElement.querySelector('.card__image').src = link;
-  cardElement.querySelector('.card__image').alt = name;
+  cardImage.src = link;
+  cardImage.alt = name;
 
   // лайки
   const likeButton = cardElement.querySelector('.card__like-icon');
@@ -49,7 +50,6 @@ function createCard(name, link) {
   })
 
   // открытие попапа с картинкой
-  const cardImage = cardElement.querySelector('.card__image');
   cardImage.addEventListener('click', function() {
     popupImage.src = cardImage.src;
     popupCaption.textContent = cardImage.alt;
@@ -79,6 +79,7 @@ addForm.addEventListener('submit', function(event) {
   event.preventDefault();
   const cardElement = createCard(placeInput.value, linkInput.value);
   cardContainer.prepend(cardElement);
+  addForm.reset();
   closePopup();
 });
 
@@ -94,6 +95,9 @@ const subscriptionInput = document.querySelector('#form-input-subscription');
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  // добавляем слушалки
+  document.addEventListener('keydown', closeByEscape);
+  document.addEventListener('click', closeByOverlay);
 }
 
 const editButton = document.querySelector('.profile__edit-button');
@@ -109,8 +113,7 @@ const addButton = document.querySelector('.profile__add-button');
 addButton.addEventListener('click', openAddPopup);
 
 function openAddPopup() {
-  openPopup(addPopup)
-  addForm.reset();
+  openPopup(addPopup);
 }
 
 // закрытие попапа
@@ -121,22 +124,25 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => closePopup(popup));
 });
 
-document.addEventListener('keydown', function(evt) {
+function closeByEscape(evt) {
   if (evt.key === 'Escape') {
     closePopup()
   }
-})
+}
 
-document.addEventListener('click', function(evt) {
+function closeByOverlay(evt) {
   if (evt.target.classList.contains('popup')) {
     closePopup()
   }
-})
+}
 
 function closePopup() {
   const popupIsOpened = document.querySelector('.popup_opened');
   if (popupIsOpened) {
     popupIsOpened.classList.remove('popup_opened');
+    // удаляем неактуальные слушалки
+    document.removeEventListener('keydown', closeByEscape);
+    document.removeEventListener('click', closeByOverlay);
   }
 };
 
