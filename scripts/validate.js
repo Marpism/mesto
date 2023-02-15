@@ -5,7 +5,7 @@ const settings = {
 
 // сделать поле красным и показать ошибку
 
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, settings) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(settings.inputTypeErrorClass);
   errorElement.textContent = errorMessage;
@@ -14,7 +14,7 @@ const showInputError = (formElement, inputElement, errorMessage) => {
 
 // убрать ошибку
 
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, settings) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(settings.inputTypeErrorClass);
   errorElement.classList.remove(settings.inputErrorClassActive);
@@ -23,17 +23,17 @@ const hideInputError = (formElement, inputElement) => {
 
 // проверка валидности
 
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, settings) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, settings);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, settings);
   }
 };
 
 // установить слушалки
 
-const setEventListeners = (formElement) => {
+const setEventListeners = (formElement, settings) => {
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
   const buttonElement = formElement.querySelector('.popup__submit-button');
 
@@ -46,7 +46,7 @@ const setEventListeners = (formElement) => {
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement);
+      checkInputValidity(formElement, inputElement, settings);
       toggleButtonState(inputList, buttonElement);
     });
   });
@@ -74,7 +74,7 @@ const setEventListeners = (formElement) => {
 
   // включить валидацию 
 
-function enableValidation() {
+function enableValidation(settings) {
   const formList = Array.from(document.querySelectorAll('.popup__form')); 
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
@@ -84,9 +84,9 @@ function enableValidation() {
       formElement.addEventListener('submit', (evt) => {
        evt.preventDefault();
     });
-    setEventListeners(formElement);
+    setEventListeners(formElement, settings);
   }); 
  }); 
  };
 
-   enableValidation();
+   enableValidation(settings);
