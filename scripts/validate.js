@@ -80,17 +80,13 @@ const setEventListeners = (formElement, settings) => {
 
 function enableValidation(settings) {
   const formList = Array.from(document.querySelectorAll(settings.popupFormClass)); 
+  
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
-     evt.preventDefault();
-   });
-    formList.forEach((formElement) => {
-      formElement.addEventListener('submit', (evt) => {
-       evt.preventDefault();
+      evt.preventDefault();
     });
     setEventListeners(formElement, settings);
-  }); 
- }); 
+  });
  };
 
    enableValidation(settings);
