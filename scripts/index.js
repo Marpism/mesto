@@ -1,4 +1,6 @@
-// рендеринг карточек
+import { Card } from './card.js'
+import { FormValidator } from './formValidator.js';
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -26,58 +28,39 @@ const initialCards = [
   }
 ];
 
-const cardContainer = document.querySelector('.cards');
-const cardTemplate = document.querySelector('#card-template').content;
-const popupImage = document.querySelector('.popup__image');
-const popupCaption = document.querySelector('.popup__image-caption');
-
-function createCard(name, link) {
-  const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-  const cardImage = cardElement.querySelector('.card__image');
-  cardElement.querySelector('.card__heading').textContent = name;
-  cardImage.src = link;
-  cardImage.alt = name;
-
-  // лайки
-  const likeButton = cardElement.querySelector('.card__like-icon');
-  likeButton.addEventListener('click', () => {
-    likeButton.classList.toggle('card__like-icon_active');
-  })
-
-  // удаление карточки
-  cardElement.querySelector('.card__bin-icon').addEventListener('click', () => {
-    cardElement.remove();
-  })
-
-  // открытие попапа с картинкой
-  cardImage.addEventListener('click', function() {
-    popupImage.src = cardImage.src;
-    popupCaption.textContent = cardImage.alt;
-    popupImage.alt = cardImage.alt;
-    openPopup(imagePopup)
-  })
-
-  return cardElement;
+const settings = {
+  popupFormClass: '.popup__form',
+  inputTypeErrorClass: 'popup__input_error',
+  inputErrorActiveClass: 'error_visible',
+  popupInputClass: '.popup__input',
+  popupSubmitButtonClass: '.popup__submit-button',
+  popupSubmitButtonDisabledClass: 'popup__submit-button_disabled'
 }
 
+const cardContainer = document.querySelector('.cards');
 
-function renderInitialCards() {
-  for (let i = 0; i < initialCards.length; i++) {
-    const cardElement = createCard(initialCards[i].name, initialCards[i].link);
-    
+  initialCards.forEach((item) => {
+    const card = new Card(item, '#card-template');
+    const cardElement = card.createCard();
     cardContainer.append(cardElement);
-  }}
-
-renderInitialCards();
+  })
 
 // добавление карточки
+const addForm = document.querySelector('#add-form');
 const placeInput = document.querySelector('#form-input-place');
 const linkInput = document.querySelector('#form-input-link');
-const addForm = document.querySelector('#add-form');
 
 addForm.addEventListener('submit', function(event) {
   event.preventDefault();
-  const cardElement = createCard(placeInput.value, linkInput.value);
+
+  const addFormData = {
+    name: placeInput.value,
+    link: linkInput.value
+  };
+
+  const card = new Card(addFormData, '#card-template');
+  const cardElement = card.createCard();
+
   cardContainer.prepend(cardElement);
   addForm.reset();
   closePopup();
@@ -157,4 +140,52 @@ function handleEditFormSubmit(event) {
 }
 
 editForm.addEventListener('submit', handleEditFormSubmit);
+
+// Валидация
+
+const addingForm = document.querySelector('#add-form');
+const editingForm = document.querySelector('#edit-form');
+
+const addFormValidation = new FormValidator(settings, addingForm);
+addFormValidation.enableValidation();
+
+const editFormValidation = new FormValidator(settings, editingForm);
+editFormValidation.enableValidation();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
