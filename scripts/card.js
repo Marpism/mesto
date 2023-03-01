@@ -46,8 +46,13 @@ class Card {
       popupImage.src = cardImage.src;
       popupCaption.textContent = cardImage.alt;
       popupImage.alt = cardImage.alt;
-      super.openPopup(imagePopup);
+      this._openImagePopup();
     })
+  }
+
+  _openImagePopup() {
+    const imagePopup = document.querySelector('#image_popup'); 
+    imagePopup.classList.add('popup_opened');
   }
 
   _setDeleteListeners() {
