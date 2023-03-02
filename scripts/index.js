@@ -38,9 +38,18 @@ const settings = {
 }
 
 const cardContainer = document.querySelector('.cards');
+const popupImage = document.querySelector('.popup__image');
+
+// открытие попапа с картинкой
+function handleCardClick() {
+  popupImage.src = this.src;
+  popupImage.alt = this.alt;
+openPopup(imagePopup);
+}
 
   initialCards.forEach((item) => {
-    const card = new Card(item, '#card-template');
+    
+    const card = new Card(item, '#card-template', handleCardClick);
     const cardElement = card.createCard();
     cardContainer.append(cardElement);
   })
@@ -50,18 +59,19 @@ const addForm = document.querySelector('#add-form');
 const placeInput = document.querySelector('#form-input-place');
 const linkInput = document.querySelector('#form-input-link');
 
-addForm.addEventListener('submit', function(event) {
-  event.preventDefault();
-
+function createCard() {
   const addFormData = {
     name: placeInput.value,
     link: linkInput.value
   };
-
-  const card = new Card(addFormData, '#card-template');
+  const card = new Card(addFormData, '#card-template', handleCardClick);
   const cardElement = card.createCard();
+  return cardElement;
+}
 
-  cardContainer.prepend(cardElement);
+addForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+  cardContainer.prepend(createCard());
   addForm.reset();
   closePopup();
 });
