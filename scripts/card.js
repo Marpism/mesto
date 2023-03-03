@@ -20,8 +20,8 @@ class Card {
     this._element = this._getTemplate();
     const cardImage = this._element.querySelector('.card__image');
     cardImage.src = this._link;
-    this._element.querySelector('.card__heading').textContent = this._name;
     cardImage.alt = this._name;
+    this._element.querySelector('.card__heading').textContent = this._name;
     this._setEventListeners()
 
     return this._element;

@@ -39,39 +39,39 @@ const settings = {
 
 const cardContainer = document.querySelector('.cards');
 const popupImage = document.querySelector('.popup__image');
+const popupCaption = document.querySelector('.popup__image-caption');
 
 // открытие попапа с картинкой
 function handleCardClick() {
   popupImage.src = this.src;
   popupImage.alt = this.alt;
+  popupCaption.textContent = this.alt;
 openPopup(imagePopup);
 }
 
-  initialCards.forEach((item) => {
-    
-    const card = new Card(item, '#card-template', handleCardClick);
-    const cardElement = card.createCard();
-    cardContainer.append(cardElement);
-  })
+function createCard(data) {
+  const card = new Card(data, '#card-template', handleCardClick);
+  const cardElement = card.createCard();
+  return cardElement;
+}
+
+initialCards.forEach((item) => {
+  cardContainer.append(createCard(item));
+})
 
 // добавление карточки
 const addForm = document.querySelector('#add-form');
 const placeInput = document.querySelector('#form-input-place');
 const linkInput = document.querySelector('#form-input-link');
 
-function createCard() {
-  const addFormData = {
-    name: placeInput.value,
-    link: linkInput.value
-  };
-  const card = new Card(addFormData, '#card-template', handleCardClick);
-  const cardElement = card.createCard();
-  return cardElement;
-}
-
 addForm.addEventListener('submit', function(event) {
   event.preventDefault();
-  cardContainer.prepend(createCard());
+
+  cardContainer.prepend(createCard({
+    name: placeInput.value,
+    link: linkInput.value
+  }));
+
   addForm.reset();
   closePopup();
 });
@@ -115,7 +115,7 @@ const closeButtons = document.querySelectorAll('.popup__close-button');
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
-});
+})
 
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
@@ -137,7 +137,7 @@ function closePopup() {
     document.removeEventListener('keydown', closeByEscape);
     document.removeEventListener('click', closeByOverlay);
   }
-};
+}
 
 // редактирование имени/подписи
 const editForm = document.querySelector('#edit-form');
