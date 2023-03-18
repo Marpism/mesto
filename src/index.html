@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/index.css">
+    <!-- <link rel="stylesheet" href="./pages/index.css"> -->
   </head>
 
   <body class="body">
     <div class="page">
       <header class="header">
-        <img src="./images/logo.svg" class="header__logo" alt="Логотип">
+        <img src="<%=require('./images/logo.svg')%>" class="header__logo" alt="Логотип">
       </header>
 
       <main class="content">
         <section class="profile">
           <div class="profile__info">
-            <img class="profile__photo" src="./images/profile__photo.jpg" alt="Фото юзера">
+            <img class="profile__photo" src="<%=require('./images/profile__photo.jpg')%>" alt="Фото юзера">
             <div class="profile__text">
               <h1 class="profile__username">Иван Сычёв</h1>
               <button type = "button" class="profile__edit-button"></button>
@@ -70,7 +70,7 @@
       <div class="popup popup_dark" id="image_popup">
         <figure class="popup__image-container">
           <button type="button" class="popup__close-button"></button>
-          <img class="popup__image" src="./images/1.jpg" alt="template">
+          <img class="popup__image" src="<%=require('./images/1.jpg')%>" alt="template">
           <figcaption class="popup__image-caption"></figcaption>
         </figure>
       </div>
@@ -85,8 +85,8 @@
         </div>
       </template>
     </div>
-    <script type="module" src="./scripts/index.js"></script>
-    <script type="module" src="./scripts/formValidator.js"></script>
-    <script type="module" src="./scripts/card.js"></script>
+    <!-- <script type="module" src="./pages/index.js"></script> -->
+    <!-- <script type="module" src="./scripts/formValidator.js"></script>
+    <script type="module" src="./scripts/card.js"></script> -->
   </body>
 </html>

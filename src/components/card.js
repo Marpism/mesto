@@ -1,5 +1,5 @@
 class Card {
-  constructor(data, templateSelector, handleCardClick) {
+  constructor({ data, handleCardClick }, templateSelector) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
@@ -33,7 +33,11 @@ class Card {
     const deleteButton = this._element.querySelector('.card__bin-icon');
 
     likeButton.addEventListener('click', this._toggleLike);
-    cardImage.addEventListener('click', this._handleCardClick, true);
+
+    cardImage.addEventListener('click', () => {this._handleCardClick({ 
+      name: this._name,
+      src: this._link })});
+      
     deleteButton.addEventListener('click', this._deleteCard);
   }
 
@@ -44,7 +48,6 @@ class Card {
   _deleteCard() {
     this.closest('.card').remove()
   }
-
 }
 
 export { Card }
