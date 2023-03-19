@@ -2,7 +2,7 @@
   width: 100%;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  margin: 0 auto 5px auto;
+  margin: 0 auto;
   font-size: 14px;
   line-height: 17px;
   font-weight: 400;
@@ -10,7 +10,7 @@
 }
 
 .popup__input:last-of-type {
-  margin: 30px auto 5px auto;
+  /* margin: 5px auto 5px auto; */
 }
 
 .popup__input:focus {

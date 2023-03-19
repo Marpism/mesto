@@ -1,4 +1,4 @@
-class Card {
+export class Card {
   constructor({ data, handleCardClick }, templateSelector) {
     this._name = data.name;
     this._link = data.link;
@@ -38,7 +38,7 @@ class Card {
       name: this._name,
       src: this._link })});
       
-    deleteButton.addEventListener('click', this._deleteCard);
+    deleteButton.addEventListener('click', () => this._deleteCard(), true);
   }
 
   _toggleLike() {
@@ -46,9 +46,10 @@ class Card {
   }
 
   _deleteCard() {
-    this.closest('.card').remove()
+    // this.closest('.card').remove()
+    this._element.remove();
+    this._element = null;
   }
 }
 
-export { Card }
 

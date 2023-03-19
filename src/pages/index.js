@@ -8,8 +8,9 @@ import { UserInfo } from '../components/UserInfo.js';
 import { initialCards,
          settings,
          cardContainerSelector,
-         placeInput,
-         linkInput } from '../utils/constants.js'
+         usernameInput, 
+         subscriptionInput
+        } from '../utils/constants.js'
 
 
 const userInfo = new UserInfo({
@@ -44,12 +45,8 @@ cardList.renderItems();
 
 const addPopup = new PopupWithForm(
   {
-  submitHandler: (evt) => {
-  evt.preventDefault();
-  const inputValues = {};
-  inputValues.name = placeInput.value;
-  inputValues.link = linkInput.value;
-  const cardElement = createCard(inputValues);
+  submitHandler: (values) => {
+  const cardElement = createCard(values);
   cardList.setItem(cardElement);
   addPopup.close();
   }
@@ -57,12 +54,9 @@ const addPopup = new PopupWithForm(
 '#add_popup');
 addPopup.setEventListeners();
 
-
 const editPopup = new PopupWithForm( 
   {
-  submitHandler: (evt) => {
-    evt.preventDefault();
-    const values = editPopup.getInputValues(); 
+  submitHandler: (values) => {
     userInfo.setUserInfo(values);
     editPopup.close();
   }
@@ -70,9 +64,13 @@ const editPopup = new PopupWithForm(
 '#edit_popup');
 editPopup.setEventListeners();
 
-
 const editButton = document.querySelector('.profile__edit-button');
-editButton.addEventListener('click', () => editPopup.open());
+editButton.addEventListener('click', () => {
+  editPopup.open();
+  const data = userInfo.getUsernInfo();
+  usernameInput.value = data.name;
+  subscriptionInput.value = data.subscription;
+});
 
 const addButton = document.querySelector('.profile__add-button');
 addButton.addEventListener('click', () => addPopup.open());
