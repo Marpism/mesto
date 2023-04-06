@@ -14,7 +14,7 @@ export class Section {
   }
 
   renderItems() {
-    this.clear();
+    // this.clear();
     this._array.forEach((item) => {
       this._renderer(item);
     });

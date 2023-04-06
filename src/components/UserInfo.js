@@ -1,19 +1,24 @@
 export class UserInfo {
- constructor({ username, subscription }) {
-  this._username = document.querySelector(username);
-  this._subscription = document.querySelector(subscription);
+ constructor({ name, about, avatar }) {
+  this._name = document.querySelector(name);
+  this._about = document.querySelector(about);
+  this._avatar = document.querySelector(avatar);
  }
  
- getUsernInfo() {
+ getUserInfo() {
   this._userInfo = {
-    name: this._username.textContent,
-    subscription: this._subscription.textContent
+    name: this._name.textContent,
+    about: this._about.textContent,
   }
   return this._userInfo;
  }
 
  setUserInfo(data) {
-  this._username.textContent = data.username;
-  this._subscription.textContent = data.subscription;
+  this._name.textContent = data.name;
+  this._about.textContent = data.about;
+ }
+
+ setAvatar(data) {
+  this._avatar.style = `background-image: url('${data.avatar}')`
  }
 }
