@@ -1,5 +1,5 @@
 export class Card {
-  constructor({ data, handleCardClick }, templateSelector, api, userData, confirmPopup) {
+  constructor({ data, handleCardClick }, templateSelector, api, userId, confirmPopup) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
@@ -7,8 +7,8 @@ export class Card {
     this._handleCardClick = handleCardClick;
     this._api = api;
     this._id = data._id;
-    this._userId = data.owner._id;
-    this._ownerId = userData._id;
+    this._ownerId = data.owner._id;
+    this._userId = userId;
     this._confirmPopup = confirmPopup;
   }
 
@@ -47,6 +47,11 @@ export class Card {
     cardImage.addEventListener('click', () => {this._handleCardClick({ 
       name: this._name,
       src: this._link })});
+    deleteButton.addEventListener('click', () => {
+        this._confirmPopup.open();
+        this._confirmPopup.deleteConfirm(this);
+      
+    })
   }
 
   _toggleLike() {
@@ -58,11 +63,13 @@ export class Card {
       .then((data) => {
         likeButton.classList.remove('card__like-icon_active')
         likeCounter.textContent = data.likes.length})
+      .catch((err) => console.log(err));
     } else {
       this._api.putLike(this._id)
       .then((data) => {
         likeButton.classList.add('card__like-icon_active')
         likeCounter.textContent = data.likes.length})
+      .catch((err) => console.log(err));
     }
   }
 

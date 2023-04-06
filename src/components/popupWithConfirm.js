@@ -8,9 +8,11 @@ export class popupWithConfirm extends Popup {
     this._submitButton = this._popup.querySelector('.popup__submit-button');
   }
 
-  setEventListeners(card) {
+  setEventListeners() {
     super.setEventListeners();
+  }
 
+  deleteConfirm(card) {
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._submitHandler(card);
@@ -21,12 +23,11 @@ export class popupWithConfirm extends Popup {
     if (isLoading) {
       this._submitButton.textContent = 'Сохранение...'
     } else {
-      this._submitButton.textContent = 'Сохранить'
+      this._submitButton.textContent = 'Да'
     }
   }
 
   close() {
     super.close();
-    this._form.reset();
   }
 }
