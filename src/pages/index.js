@@ -138,20 +138,22 @@ const editButtonHandler = () => {
     usernameInput.value = data.name;
     subscriptionInput.value = data.about;
 }
-
 editButton.addEventListener('click', editButtonHandler);
 
 const addButton = document.querySelector('.profile__add-button');
-addButton.addEventListener('click', () => {
+const addButtonHandler = () => {
   addFormValidation.deleteErrors();
   addPopup.open();
-});
+}
+addButton.addEventListener('click', addButtonHandler);
 
 const avatarButton = document.querySelector('.profile__avatar-button');
-avatarButton.addEventListener('click', () => {
+
+const avatarButtonHandler = () => {
   avatarFormValidation.deleteErrors();
   avatarPopup.open();
-});
+}
+avatarButton.addEventListener('click', avatarButtonHandler);
 
 const confirmPopup = new popupWithConfirm(
   {submitHandler: (card) => {
